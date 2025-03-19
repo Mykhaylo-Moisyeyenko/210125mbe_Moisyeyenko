@@ -1,4 +1,4 @@
-package de.telran.DZ_exception_20250314;
+package de.telran.DZ_exception_20250314.Task1;
 
 //Создайте метод, в который передается строка e-mail и он проверяет его на правильность
 //по условию:
