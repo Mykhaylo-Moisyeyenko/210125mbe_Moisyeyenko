@@ -11,7 +11,6 @@ public class MainTask2 {
             boolean check = checkPassword("Misha", "1234567891011121314/", "12345678910111213141");
             System.out.println("Результаты проверки пароля: " + check);
         } catch (WrongPasswordException e) {//Обработка исключений проводится в вызывающем методе:
-            System.out.println(e);
             System.out.println("Результаты проверки пароля: \n" + e);
         }
     }
