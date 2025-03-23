@@ -1,4 +1,4 @@
-package de.telran.Lesson10;
+package de.telran.Lesson10_Linked_List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class MainLesson10 {
 
         Random random = new Random();
         List<Integer> integers = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             integers.add(random.nextInt(500));
         }
 
@@ -45,7 +45,7 @@ public class MainLesson10 {
 
     //    3 вывести список в обратном порядке
     public static void listBack(List<Integer> integers) {
-        for (int i = integers.size()-1; i > 0; i--) {
+        for (int i = integers.size()-1; i >= 0; i--) {
             System.out.println("Элемент списка с индексом "+ i + " " + integers.get(i));
         }
     }
