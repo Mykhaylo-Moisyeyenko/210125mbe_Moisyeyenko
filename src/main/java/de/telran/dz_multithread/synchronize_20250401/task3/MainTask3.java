@@ -9,43 +9,44 @@ package de.telran.dz_multithread.synchronize_20250401.task3;
 //У вас баланс денежных средств на счетах клиентов до начала операций должен быть равен количеству денег после окончание дня.
 //Если это не так, то как Вы думаете почему?  Можно ли это исправить и как?
 
-import de.telran.lesson16_sorting_objects.dz_sorting.Book;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainTask3 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         int sumOnAccounts = 0;
-        int accGetMoney;
-        int accPayMoney;
 
-        List<Account> accounts = new ArrayList<>(); //лист со счетами клиентов
-
+        List<Account> accounts = new ArrayList<>(); //создаю лист со счетами клиентов
         for (int i = 0; i < 100; i++) {//заполняю лист счетами с исходными 1000 евро на счету
-            Account account = new Account(i, 1000);
+            Account account = new Account(1000);
             accounts.add(i, account);
         }
 
         for (int i = 0; i < accounts.size(); i++) {//рассчитываю общее количество денег на счетах клиентов
-            sumOnAccounts += accounts.get(i).sum;
+            sumOnAccounts += accounts.get(i).getBalance();
         }
-        System.out.println("Общее количество денег на счетах клиентов: " + sumOnAccounts);
+        System.out.println("Исходное количество денег на счетах клиентов: " + sumOnAccounts);
 
-        Random random = new Random();//рандомайзер для пары случайных счетов (а вернее - их индекс в Листе)
+        TaskGetMoney taskGetMoney = new TaskGetMoney(accounts);
+        TaskPayMoney taskPayMoney = new TaskPayMoney(accounts);
 
-        for (int i = 0; i < 10000; i++) {//инициирую 10000 операций по списанию-оплате 10 евро
-            accGetMoney = random.nextInt(100);
-            accPayMoney = random.nextInt(100);
-            if (accounts.get(accGetMoney).sum>=10){//проверяю наличие на счету более чем 10 евро
-                accounts.get(accGetMoney).sum -= 10;//списываю 10 евро
-                accounts.get(accPayMoney).sum += 10;//зачисляю 10 евро
-            }
+        Thread threadGetMoney = new Thread(taskGetMoney);
+        Thread threadPayMoney = new Thread(taskPayMoney);
+
+        threadGetMoney.start();
+        threadPayMoney.start();
+
+        threadGetMoney.join();
+        threadPayMoney.join();
+
+        sumOnAccounts = 0;//обнуляю счетчик перед проверкой общего баланса
+        for (int i = 0; i < accounts.size(); i++) {//рассчитываю общее количество денег на счетах клиентов
+            sumOnAccounts += accounts.get(i).getBalance();
         }
-        System.out.println("Общее количество денег на счетах клиентов: " + sumOnAccounts);
+        System.out.println("Итоговая сумма денег на счетах клиентов после транзакций: " + sumOnAccounts);
+
         System.out.println("Состояние счетов после 10000 операций: \n" + accounts);
     }
 }
