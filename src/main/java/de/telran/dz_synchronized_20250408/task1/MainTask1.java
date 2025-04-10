@@ -47,7 +47,7 @@ class ThreadCallable implements Callable<Integer> {
         Integer count = 0;
         for (int i = start; i <= end; i++) {
             boolean isPrime = true;
-            for (int j = 2; j < i; j++) { // modified // Проверяем все числа до i - 1
+            for (int j = 2; j < i; j++) {
                 if (i % j == 0) {
                     isPrime = false;
                     break;
