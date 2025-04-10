@@ -1,4 +1,4 @@
-package de.telran.Lesson10_Linked_List;
+package de.telran.lesson10_Linked_List;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package de.telran.Lesson12.Tasks;
+package de.telran.lesson12.Tasks;
 
 public class Author {
 
