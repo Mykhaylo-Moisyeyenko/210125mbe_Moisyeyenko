@@ -11,7 +11,6 @@ package de.telran.dz_threadpool_20250411.task2;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
 
 public class MainTask2 {
     public static void main(String[] args) {
