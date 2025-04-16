@@ -42,10 +42,12 @@ class BookStorageTest {
     void testAddWhenBookIsNull() {//если в Мар вместо книги передается null:
         Book book = null;
         BookStorage bookStorage = new BookStorage();
-        bookStorage.add(book);
-        System.out.println(book);
-        NullPointerException a = new NullPointerException();
-        assertEquals(a, a);//вот тут я не понял, что я ожидаю в результате работы кода и почему тест не проходит
+        assertThrows(NullPointerException.class,
+                () -> bookStorage.add(book));
+
+//        System.out.println(book);
+//        NullPointerException a = new NullPointerException();
+//        assertEquals(a, a);//вот тут я не понял, что я ожидаю в результате работы кода и почему тест не проходит
     }
 
     @Test
@@ -76,8 +78,12 @@ class BookStorageTest {
     @Test
     void testGetBookWhenIsbnCorrectAndBookNotExists() {
         BookStorage bookStorage = new BookStorage();
-        Book b = bookStorage.get("99999");
-        assertEquals(null, b);//вот тут я не понял почему тест не проходит
+        Book book = new Book("BookTest", "12345");
+        bookStorage.add(book);
+        assertThrows(IllegalArgumentException.class,
+                () -> bookStorage.get("99999"));
+//        Book b = bookStorage.get("99999");
+//        assertEquals(null, b);//вот тут я не понял почему тест не проходит
     }
 
     @Test
@@ -85,19 +91,26 @@ class BookStorageTest {
         Book book = new Book("BookTest", "12345");
         BookStorage bookStorage = new BookStorage();
         bookStorage.add(book);
-        Book b = bookStorage.get(null);
-        assertEquals(null, b);// непонятно почему тест не проходит
+        assertThrows(IllegalArgumentException.class,
+                () -> bookStorage.get(null));
+
+//        Book b = bookStorage.get(null);
+//        assertEquals(null, b);// непонятно почему тест не проходит
     }
 
     @Test
-    void testGetBookWhenIsbnCorrectIsEmpty(){
+    void testGetBookWhenIsbnCorrectIsEmpty() {
         Book book = new Book("BookTest", "12345");
         BookStorage bookStorage = new BookStorage();
         bookStorage.add(book);
-        Book b = bookStorage.get("");
-        IllegalArgumentException a = new IllegalArgumentException();
-        assertEquals(a, a);//вот тут я не понял, что я ожидаю в результате работы кода и почему тест не проходит
+        assertThrows(IllegalArgumentException.class,
+                ()-> bookStorage.get(""));
+
+//        Book b = bookStorage.get("");
+//        IllegalArgumentException a = new IllegalArgumentException();
+//        assertEquals(a, a);//вот тут я не понял, что я ожидаю в результате работы кода и почему тест не проходит
 //        может быть так?:
 //        assertEquals("You inputted empty string, input right ISBN", a);
+
     }
 }

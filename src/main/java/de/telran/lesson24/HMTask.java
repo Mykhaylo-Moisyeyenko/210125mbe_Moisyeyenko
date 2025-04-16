@@ -8,8 +8,8 @@ public class HMTask {
         // create 3 book
         // put in storage
         BookStorage bookStorage = new BookStorage();
-        bookStorage.add(new Book("One", "12345"));
-//        bookStorage.add(null);
+//        bookStorage.add(new Book("One", "12345"));
+        bookStorage.add(null);
         bookStorage.add(new Book("Two", "32455"));
         bookStorage.add(new Book("Three", "32451"));
         // etc

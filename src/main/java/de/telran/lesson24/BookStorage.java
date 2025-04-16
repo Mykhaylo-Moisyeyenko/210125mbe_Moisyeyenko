@@ -21,11 +21,11 @@ public class BookStorage {
     }
 
     public Book get(String isbn) {
-        if (isbn==""){
-            throw new IllegalArgumentException("You inputted empty string, input right ISBN");
+        if (isbn=="" || isbn==null || isbn.length()<5 || isbn.length()>5){
+            throw new IllegalArgumentException("You inputted wrong ISBN, input right ISBN");
         }
         if (!storage.containsKey(isbn)) {
-            throw new IllegalArgumentException("Isbn is no correct");
+            throw new IllegalArgumentException("Isbn correct but book does not exists");
         }
         return storage.get(isbn);
     }
